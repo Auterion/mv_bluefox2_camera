@@ -3,6 +3,9 @@
 # Bluefox2
 *This driver depends on package [`camera_base`](https://github.com/KumarRobotics/camera_base)*
 
+*See [Auterion Engingeering Wiki](https://sites.google.com/auterion.com/engineering/computer-vision/mvbluefox-camera) for a quick setup instruction.*
+
+---
 https://github.com/KumarRobotics/bluefox2
 
 ![image](http://i.imgur.com/89Bb1hR.png)
