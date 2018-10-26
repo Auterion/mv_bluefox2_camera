@@ -6,6 +6,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake)
 
 find_package(catkin REQUIRED COMPONENTS
     roscpp nodelet camera_base
+    mavros_msgs
     message_generation
     )
 find_package(mvIMPACT REQUIRED)
@@ -16,7 +17,7 @@ generate_dynamic_reconfigure_options(cfg/Bluefox2Dyn.cfg)
 
 # services
 add_service_files(FILES SetExposeSrv.srv)
-generate_messages(DEPENDENCIES std_msgs)
+generate_messages(DEPENDENCIES std_msgs mavros_msgs)
 
 catkin_package(
     INCLUDE_DIRS include ${mvIMPACT_INCLUDE_DIRS}

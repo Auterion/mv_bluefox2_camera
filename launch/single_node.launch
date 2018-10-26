@@ -1,23 +1,24 @@
 <launch>
     <!-- Common Interface -->
-    <arg name="device"/>
-    <arg name="rate" default="20"/>
+    <arg name="device" default="25002796"/>
+    <arg name="fps" default="20"/>
 
     <!-- Camera Settings -->
     <arg name="serial" default="$(arg device)"/>
-    <arg name="camera_name" default="mv_$(arg serial)"/>
+    <arg name="camera_name" default="mv"/>
     <arg name="camera" default="$(arg camera_name)"/>
     <arg name="frame_id" default="$(arg camera)"/>
     <arg name="calib_url" default="file://${ROS_HOME}/camera_info/$(arg camera_name).yaml"/>
-    <arg name="fps" default="$(arg rate)"/>
 
     <arg name="idpf" default="0"/>
-    <arg name="aec" default="true"/>
-    <arg name="expose_us" default="10000"/>
+    <arg name="aec" default="false"/>
+    <arg name="expose_us" default="1500"/>
     <arg name="agc" default="true"/>
     <arg name="gain_db" default="0.0"/>
     <arg name="cbm" default="0"/>
-    <arg name="ctm" default="1"/>
+    <arg name="ctm" default="1"/>                   <!-- trigger mode: 1 (on demand), 3 (hw trigger) -->
+    <arg name="cts" default="0"/>                   <!-- trigger source -->
+    <arg name="calibration_offset" default="0.0"/>   <!-- kalibr time shift in [s] -->
     <arg name="dcfm" default="0"/>
     <arg name="hdr" default="false"/>
     <arg name="wbp" default="-1"/>
@@ -45,6 +46,7 @@
         <param name="gain_db" type="double" value="$(arg gain_db)"/>
         <param name="cbm" type="int" value="$(arg cbm)"/>
         <param name="ctm" type="int" value="$(arg ctm)"/>
+        <param name="calibration_offset" type="double" value="$(arg calibration_offset)"/>
         <param name="dcfm" type="int" value="$(arg dcfm)"/>
         <param name="hdr" type="bool" value="$(arg hdr)"/>
         <param name="wbp" type="int" value="$(arg wbp)"/>
