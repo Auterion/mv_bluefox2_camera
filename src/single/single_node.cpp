@@ -71,14 +71,13 @@ void SingleNode::Acquire() {
         ros::Duration(0.001).sleep();
         ROS_DEBUG("no trigger received");
       }
-      ROS_INFO("received frame.   time: %f", ros::Time::now().toSec());
+      ROS_DEBUG("received frame.   time: %f", ros::Time::now().toSec());
       // a new video frame was captured - check if we need to skip it if one trigger packet was lost
       if (pkt.triggerCounter == nextTriggerCounter) {
         fifoRead(pkt);
         const auto new_stamp = pkt.triggerTime + expose_duration + ros::Duration(calibration_offset);
         bluefox2_ros_->PublishCamera(new_stamp);
-        ROS_INFO("publish image with stamp: %f", new_stamp.toSec());
-        ROS_INFO("delay pulse to arrival %fms", (old_stamp.toSec() - new_stamp.toSec()) * 1000.0);
+        ROS_INFO("publish re-stamped frame. delay pulse to arrival %fms", (old_stamp.toSec() - pkt.triggerTime.toSec()) * 1000.0);
         nextTriggerCounter++;
       } else { 
         ROS_WARN("Sync counters mavros %d -> bluefox %d", pkt.triggerCounter, nextTriggerCounter);
